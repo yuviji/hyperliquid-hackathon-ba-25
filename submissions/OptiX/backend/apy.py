@@ -50,7 +50,7 @@ def calculate_cost_aware_effective_apy(payload):
     return {
         "output_token": output_token,
         "output_net_apy": output_net_apy,
-        "effective_output_apy": effective_output_apy
+        "cae_apy": effective_output_apy
     }
 
 

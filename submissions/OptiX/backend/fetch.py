@@ -8,7 +8,34 @@ X_API_KEY = os.getenv("X_API_KEY")
 if not X_API_KEY:
     raise RuntimeError("Missing X_API_KEY in environment variables")
 
+def get_input_token(pool_address, chain):
+    """
+    Fetch the input token for a given pool.
+    """
+    url = "https://yield-api.gluex.xyz/diluted-apy"
+    payload = {
+        "pool_address": pool_address,
+        "chain": chain,
+        "input_amount": 1  # Dummy amount to fetch data
+    }
+    headers = {"Content-Type": "application/json", 'x-api-key': X_API_KEY}
 
+    response = requests.post(url, json=payload, headers=headers)
+    try:
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        raise RuntimeError(f"Failed to fetch or parse response: {e}")
+
+    yield_block = data.get("diluted_yield") or data.get("diluted_apy")
+    if not isinstance(yield_block, dict):
+        raise RuntimeError("Response missing 'diluted_yield' (or 'diluted_apy') object")
+
+    input_token = yield_block.get("input_token")
+    if not input_token:
+        raise RuntimeError("Input token not found in response")
+
+    return input_token
 
 def get_vault_data(pool_address, chain, input_amount):
     """
@@ -31,7 +58,7 @@ def get_vault_data(pool_address, chain, input_amount):
 
     yield_block = data.get("diluted_yield") or data.get("diluted_apy")
     input_token = yield_block.get("input_token")
-    
+
     if not isinstance(yield_block, dict):
         raise RuntimeError("Response missing 'diluted_yield' (or 'diluted_apy') object")
 

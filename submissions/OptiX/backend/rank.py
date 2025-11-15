@@ -1,11 +1,11 @@
 def rank_vaults(options):
     """
     Rank a set of options by highest cost-aware effective APY, then by highest TVL.
-    Each option should be a dictionary with 'pool_address', 'chain', 'cae_apy', 'tvl'.
+    Each option should be a dictionary with 'pool_address', 'chain', 'apy', 'tvl'.
     """
 
     # Sort by cost-aware effective APY (descending), then by TVL (descending)
-    options.sort(key=lambda x: (-x.get("cae_apy", 0), -x.get("tvl", 0)))
+    options.sort(key=lambda x: (-x.get("apy", 0), -x.get("tvl", 0)))
     return options
 
 def choose_position(net_apy, options):
