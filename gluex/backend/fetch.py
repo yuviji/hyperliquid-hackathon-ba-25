@@ -71,16 +71,3 @@ def get_tvl(pool_address, chain):
     return float(tvl)
 
 
-if __name__ == "__main__":
-    # Example usage:
-    vaults = [
-        {"pool_address": "0xe25514992597786e07872e6c5517fe1906c0cadd", "chain": "hyperevm", "input_amount": 100000},
-        {"pool_address": "0xcdc3975df9d1cf054f44ed238edfb708880292ea", "chain": "hyperevm", "input_amount": 100000},
-        {"pool_address": "0x8f9291606862eef771a97e5b71e4b98fd1fa216a", "chain": "hyperevm", "input_amount": 100000},
-        {"pool_address": "0x9f75eac57d1c6f7248bd2aede58c95689f3827f7", "chain": "hyperevm", "input_amount": 100000},
-        {"pool_address": "0x63cf7ee583d9954febf649ad1c40c97a6493b1be", "chain": "hyperevm", "input_amount": 100000}
-    ]
-    ranked = rank_vaults(vaults)
-    print(ranked)
-
-
