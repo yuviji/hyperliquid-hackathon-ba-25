@@ -1,6 +1,8 @@
+from operator import call
 from typing import List
 from fetch import get_tvl, get_input_token, get_vault_data
 from apy import calculate_cost_aware_effective_apy
+from quote import run_quote
 from dotenv import load_dotenv
 from rank import choose_position
 import os
@@ -62,5 +64,26 @@ class User:
         best_option = choose_position(current_net_apy, options)
         if best_option:
             # run quote
-            pass
-        
+            calldata = self.commit_trade(current_token, best_option)
+            return calldata
+        return None
+    
+    def commit_trade(self, input_token, best_option):
+        # commit the trade to gluex router
+        payload = {
+            "chainID": self.chainID,
+            "inputToken": input_token,
+            "outputToken": best_option["output_token"],
+            "inputAmount": self.token_holdings,
+            "orderType": "BUY",
+            "userAddress": self.userAddress,
+            "outputReceiver": best_option["pool_address"],
+            "uniquePID": uniquePID
+        }
+        # run quote
+        quote_response = run_quote(payload)
+        effectiveOutputAmount = quote_response["effectiveOutputAmount"]
+        self.token_holdings = effectiveOutputAmount
+        self.userAddress = best_option["pool_address"]
+        calldata = quote_response["calldata"]
+        return calldata
