@@ -1,7 +1,3 @@
-
-from apy import calculate_cae_apy
-from fetch import get_apy, get_tvl
-
 def rank_vaults(options):
     """
     Rank a set of options by highest cost-aware effective APY, then by highest TVL.
@@ -22,7 +18,3 @@ def choose_position(net_apy, options):
     if best_option and best_option["cae_apy"] > net_apy:
         return best_option
     return None
-
-
-def main():
-    pass

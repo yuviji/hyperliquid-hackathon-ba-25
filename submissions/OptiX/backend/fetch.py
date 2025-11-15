@@ -8,6 +8,8 @@ X_API_KEY = os.getenv("X_API_KEY")
 if not X_API_KEY:
     raise RuntimeError("Missing X_API_KEY in environment variables")
 
+
+
 def get_vault_data(pool_address, chain, input_amount):
     """
     Fetch the input token, net APY, and daily APY for a given pool and amount.
@@ -28,6 +30,8 @@ def get_vault_data(pool_address, chain, input_amount):
         raise RuntimeError(f"Failed to fetch or parse response: {e}")
 
     yield_block = data.get("diluted_yield") or data.get("diluted_apy")
+    input_token = yield_block.get("input_token")
+    
     if not isinstance(yield_block, dict):
         raise RuntimeError("Response missing 'diluted_yield' (or 'diluted_apy') object")
 
@@ -43,7 +47,6 @@ def get_vault_data(pool_address, chain, input_amount):
     net_apy = float(net_apy)
     daily_yield = (1 + net_apy / 100) ** (1 / 365) - 1
 
-    input_token = yield_block.get("input_token")
     return input_token, net_apy, daily_yield
 
 
