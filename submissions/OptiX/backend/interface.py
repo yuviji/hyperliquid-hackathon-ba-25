@@ -26,6 +26,11 @@ class User:
     def set_of_vaults(self, vault_addresses: List[str]):
         self.vaults = vault_addresses
 
+    def redeem(self, amount: float):
+        if amount > self.token_holdings:
+            raise ValueError("Insufficient token holdings to redeem the requested amount.")
+        self.token_holdings -= amount
+
     def get_currect_token(self) -> int:
         # return the current token and its net apy
         input_token, net_apy, _ = get_vault_data(self.userAddress, self.chainID, self.token_holdings)
