@@ -70,4 +70,4 @@ if __name__ == "__main__":
     result = calculate_cost_aware_effective_apy(payload)
     print("Output Token:", result["output_token"])
     print("Output Net APY:", result["output_net_apy"])
-    print("Effective Output APY:", result["effective_output_apy"])
+    print("Effective Output APY:", result["cae_apy"])

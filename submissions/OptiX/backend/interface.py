@@ -34,8 +34,11 @@ class User:
     def reallocate(self):
         # for each vault, get the corresponding input_token
         current_token, current_net_apy = self.get_currect_token()
+        print(f"[DEBUG] User.reallocate: current_token={current_token}, current_net_apy={current_net_apy}")
         options = []
         for vault in self.vaults:
+            if vault == self.userAddress:
+                continue
             input_token = get_input_token(vault, self.chainID)
             tvl = get_tvl(vault, self.chainID)
 
@@ -59,13 +62,15 @@ class User:
                 "input_token": input_token,
                 "output_token": apy_data["output_token"],
             })
-
-            # rank vaults and choose the best one
+        if len(options) == 0:
+            return None
+        # rank vaults and choose the best one
         best_option = choose_position(current_net_apy, options)
+        # print(f"[DEBUG] User.reallocate: best_option={best_option}, current_net_apy={current_net_apy}")
         if best_option:
             # run quote
             calldata = self.commit_trade(current_token, best_option)
-            return calldata
+            return best_option, calldata
         return None
     
     def commit_trade(self, input_token, best_option):
@@ -87,3 +92,10 @@ class User:
         self.userAddress = best_option["pool_address"]
         calldata = quote_response["calldata"]
         return calldata
+    
+
+if __name__ == "__main__":
+    # Example usage
+    user = User(token_holdings=100000000, chainID="hyperevm", userAddress="0xcdc3975df9d1cf054f44ed238edfb708880292ea")
+    user.set_of_vaults(["0x8f9291606862eef771a97e5b71e4b98fd1fa216a", "0xe25514992597786e07872e6c5517fe1906c0cadd", "0x9f75eac57d1c6f7248bd2aede58c95689f3827f7", "0x63cf7ee583d9954febf649ad1c40c97a6493b1be"])
+    calldata = user.reallocate()
