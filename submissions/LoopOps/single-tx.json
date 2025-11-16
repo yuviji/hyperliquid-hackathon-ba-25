@@ -2,9 +2,9 @@
   "loopDrops": [
     {
       "distribution": {
-        "name": "Genesis LoopDrop",
+        "name": "Drop for Demo",
         "description": "Initial token distribution to early community members",
-        "schedule": "2025-11-16T18:22:00Z",
+        "schedule": "2025-11-16T18:31:00Z",
         "token": "0x00fDBc53719604D924226215bc871D55e40a1009",
         "amount": 5000000000000000,
         "recipients": [

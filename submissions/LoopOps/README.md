@@ -17,7 +17,7 @@
 
 VIDEO DEMO: https://youtu.be/h1wtZy3njvY
 
-TRANSACTION FROM VIDEO DEMO: 
+TRANSACTION FROM VIDEO DEMO: https://hyperevmscan.io/tx/0x6f0d365f3ee14eaf89b0fbc3c1ab4dcdb688112827af328241c75d5dbc35c147
 
 ### Deployed Contracts
 
