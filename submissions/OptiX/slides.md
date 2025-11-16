@@ -56,6 +56,9 @@ style: |
   <img src="https://standards.wharton.upenn.edu/wp-content/plugins/martech-chupacabra/includes/images/Wharton-Logo-RGB.png" alt="Wharton" height="60" />
 </div>
 
+Yangxinyu Xie, Wharton '25  
+Nevan Sujit, Penn '28
+
 ---
 
 ## The Problem
@@ -75,9 +78,11 @@ style: |
 
 <br/>
 
-Risk-adjusted, cost-aware ranking.
+![bg](source/Slide6.png)
+
+Real-time risk-adjusted, cost-aware ranking.
+
 One-click reallocation.
-Router calldata ready.
 
 ---
 
@@ -145,33 +150,13 @@ Streamlit · Python · GlueX APIs
 
 ---
 
-## Experience
-
-<br/>
-
-Portfolio overview.
-Ranked alternatives.
-Quick reallocate.
-
----
-
-## Demo Flow
-
-<br/>
-
-<p class="center" style="font-size: 2.8rem;">
-Connect → Evaluate → Switch
-</p>
-
----
-
 ## What's Next
 
 <br/>
 
-Historical tracking.
-Strategy presets.
-Automated alerts.
+Volatility-aware APY and risk scoring.
+Diversified portfolio via mean-variance optimization.
+Historical tracking, strategy presets, and alerts.
 
 ---
 
