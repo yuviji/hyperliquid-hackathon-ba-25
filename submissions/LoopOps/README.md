@@ -39,6 +39,13 @@ TRANSACTION FROM VIDEO DEMO: https://hyperevmscan.io/tx/0x6f0d365f3ee14eaf89b0fb
 - **Region:** us-east-1
 - **Dashboard:** [View Project](https://supabase.com/dashboard/project/wtuqwigyhuzuiabpwdep)
 
+### Screenshots
+
+![Upload Dashboard](./a.png)
+![Operator Dashboard](./b.png)
+*Real-time distribution monitoring and approval tracking*
+
+
 ---
 
 ## 📋 Table of Contents
