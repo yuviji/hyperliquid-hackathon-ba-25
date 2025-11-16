@@ -1,0 +1,118 @@
+{
+  "loopDrops": [
+    {
+      "distribution": {
+        "name": "Yuvraj LoopDrop",
+        "description": "Initial token distribution to early community members",
+        "schedule": "2025-11-16T18:27:00Z",
+        "token": "0x00fDBc53719604D924226215bc871D55e40a1009",
+        "amount": 3000000000000000,
+        "recipients": [
+          {
+            "address": "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+            "amount": 1000000000000000
+          },
+          {
+            "address": "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E",
+            "amount": 1000000000000000
+          },
+          {
+            "address": "0x5e6c00799ACcf807044d62985C844c55d5DAbF80",
+            "amount": 1000000000000000
+          }
+        ],
+        "approvers": [
+          "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+          "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E",
+          "0x5e6c00799ACcf807044d62985C844c55d5DAbF80"
+        ]
+      }
+    },
+    {
+      "distribution": {
+        "name": "Community Airdrop Q1",
+        "description": "Quarterly community reward distribution",
+        "schedule": "2025-11-16T18:35:00Z",
+        "token": "0x00fDBc53719604D924226215bc871D55e40a1009",
+        "amount": 6000000000000000,
+        "recipients": [
+          {
+            "address": "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+            "amount": 2000000000000000
+          },
+          {
+            "address": "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E",
+            "amount": 2000000000000000
+          },
+          {
+            "address": "0x5e6c00799ACcf807044d62985C844c55d5DAbF80",
+            "amount": 2000000000000000
+          }
+        ],
+        "approvers": [
+          "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+          "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E",
+          "0x5e6c00799ACcf807044d62985C844c55d5DAbF80"
+        ]
+      }
+    }
+  ],
+  "loyaltyRewards": [
+    {
+      "distribution": {
+        "description": "Weekly LOOP Token Loyalty Rewards",
+        "frequency": "weekly",
+        "startDate": "2025-11-17T00:00:00Z",
+        "endDate": "2025-12-31T23:59:59Z",
+        "token": "0x00fDBc53719604D924226215bc871D55e40a1009",
+        "amount": 1500000000000000,
+        "recipients": [
+          {
+            "address": "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+            "amount": 500000000000000
+          },
+          {
+            "address": "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E",
+            "amount": 500000000000000
+          },
+          {
+            "address": "0x5e6c00799ACcf807044d62985C844c55d5DAbF80",
+            "amount": 500000000000000
+          }
+        ],
+        "approvers": [
+          "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+          "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E"
+        ]
+      }
+    },
+    {
+      "distribution": {
+        "description": "Monthly Staking Rewards for Active Participants",
+        "frequency": "monthly",
+        "startDate": "2025-11-17T00:00:00Z",
+        "endDate": "2025-12-31T23:59:59Z",
+        "token": "0x00fDBc53719604D924226215bc871D55e40a1009",
+        "amount": 3000000000000000,
+        "recipients": [
+          {
+            "address": "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+            "amount": 1000000000000000
+          },
+          {
+            "address": "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E",
+            "amount": 1000000000000000
+          },
+          {
+            "address": "0x5e6c00799ACcf807044d62985C844c55d5DAbF80",
+            "amount": 1000000000000000
+          }
+        ],
+        "approvers": [
+          "0x027dc86AEFE8aa96353c2aeE9FF06d3BE4ff40Eb",
+          "0xc1AE83faB1beDAA40AC59fed0F450428d807A28E"
+        ]
+      }
+    }
+  ]
+}
