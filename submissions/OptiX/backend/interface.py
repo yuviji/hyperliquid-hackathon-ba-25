@@ -1,6 +1,8 @@
+from operator import call
 from typing import List
 from fetch import get_tvl, get_input_token, get_vault_data
 from apy import calculate_cost_aware_effective_apy
+from quote import run_quote
 from dotenv import load_dotenv
 from rank import choose_position
 import os
@@ -25,19 +27,19 @@ class User:
 
     def set_of_vaults(self, vault_addresses: List[str]):
         self.vaults = vault_addresses
-    
-    def get_current_token(self):
-        input_token, net_apy, _ = get_vault_data(
-            self.userAddress, self.chainID, self.token_holdings
-        )
+
+    def get_currect_token(self) -> int:
+        # return the current token and its net apy
+        input_token, net_apy, _ = get_vault_data(self.userAddress, self.chainID, self.token_holdings)
         return input_token, net_apy
 
     def reallocate(self):
         # for each vault, get the corresponding input_token
         current_token, current_net_apy = self.get_currect_token()
+        print(f"[DEBUG] User.reallocate: current_token={current_token}, current_net_apy={current_net_apy}")
         options = []
         for vault in self.vaults:
-            input_token = get_input_token(pool_address=vault, chainID=self.chainID)
+            input_token = get_input_token(vault, self.chainID)
             tvl = get_tvl(vault, self.chainID)
 
             payload = {
@@ -60,24 +62,12 @@ class User:
                 "input_token": input_token,
                 "output_token": apy_data["output_token"],
             })
-
-            # rank vaults and choose the best one
+        if len(options) == 0:
+            return None
+        # rank vaults and choose the best one
         best_option = choose_position(current_net_apy, options)
+        # print(f"[DEBUG] User.reallocate: best_option={best_option}, current_net_apy={current_net_apy}")
         if best_option:
-            
-            quote = get_quote({
-                "chainID": self.chainID,
-                "inputToken": current_token,
-                "outputToken": best_option["pool_address"],
-                "inputAmount": self.token_holdings,
-                "userAddress": self.userAddress,
-                "outputReceiver": self.userAddress,
-                "uniquePID": uniquePID
-            })
-
-            return {
-                "best_pool": best_option["pool_address"],
-                "apy": best_option["apy"],
-                "tvl": best_option["tvl"],
-                "quote": quote
-            }
+            # run quote
+            pass
+        
