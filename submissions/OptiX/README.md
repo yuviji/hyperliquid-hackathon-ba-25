@@ -1,132 +1,90 @@
-# 🚀 OptiX: Autonomous GlueX Vault Yield Optimizer
+# OptiX (Streamlit App)
 
-**OptiX** is the next-gen automated yield optimizer for Hyperliquid's GlueX vaults. Users deposit once, and OptiX does the rest—allocating capital to the best opportunities via real-time vault selection, operator-verified rebalances, and a world-class dashboard experience. Instantly DeFi, zero stress, maximum yield.
+Cost‑aware vault reallocation on GlueX with a simple, dark‑themed Streamlit UI.
 
----
-
-**🏆 Built for the HyperEVM Hackathon — Leverage On-Chain Automation for Real Yield.**
-
----
-
-## 🔥 Elevator Pitch
-
-- **For Users:**
-    - One deposit, highest APYs, always adapted.
-    - Withdraw anytime, no manual switching.
-    - Zero cognitive overhead—OptiX vault picks *for* you.
-- **For Protocol Operators:**
-    - Secure admin panel to manage whitelists and rebalance strategies.
-    - Full on-chain transparency with off-chain intelligence.
-- **For Judges:**
-    - Polished institutional dashboard (Morpho/Aave-style).
-    - Fully integrated: Hyperliquid smart contracts, Python GlueX backend, Ethers.js, real APYs, premium UX.
-
-## 🌈 Key Features
-
-- **Automated vault allocation** using on-chain and backend logic—max APY, cost-aware.
-- **Deposit + Withdraw UX:** Safety-first, confirmation modals, gas estimates.
-- **Live GlueX APY surfacing** — shows every opportunity, not just the currently selected.
-- **Operator/Admin panel** for protocol-controlled rebalances, whitelist, router calldata.
-- **Beautiful, real-time DeFi dashboard** — inspired by Yearn, Morpho, Aave v3.
-- **Full-stack:** React frontend, Python Flask backend, Solidity BoringVault, live contract integrations.
+- Wallet/session setup
+- Deposit and redeem (simulated via `User` state)
+- Reallocation preview with Top Options table (APY, Δ vs current, TVL)
+- Quick Reallocate (one‑click evaluate + switch if better)
+- Router calldata generation for operators
 
 ---
 
-## 🏗️ Architecture Overview
+## Quickstart
 
-**Frontend:** React (Vite), Ethers.js v6, Context API
-- `/components/` — Dashboard, StrategyCard, OpportunitiesTable, operator/admin modals
-- `/hooks/` — On-chain and wallet hooks, APY data, contract wrappers
-- `/lib/` — API clients for backend and GlueX
+```bash
+# 1) Install Python deps
+cd submissions/OptiX/backend
+pip install -r requirements.txt
 
-**Backend:** Python Flask, interface.py abstraction
-- Exposes `/apy`, `/recommend`, `/router-route` endpoints
-- Integrates with GlueX API for vault data, APY, TVL, and quoting
-- Runs reallocation and ranking logic securely off-chain
+# 2) Create a .env (see below)
 
-**Contracts:**
-- OptimizerBoringVault (Solidity, upgradable, EVM-compatible)
-- Integrates ERC20 asset tokens
-- Supports deposit, withdraw, operator-only strategy rebalance, and whitelist control
+# 3) Run the app (from submissions/OptiX)
+cd ..
+streamlit run backend/streamlit_app.py
+```
 
----
-
-## 🔌 API Endpoints
-
-- `GET /apy`: Returns real-time APYs for all vaults
-- `GET /recommend`: Returns best vault for current user holdings
-- `POST /router-route`: Backend computes calldata for rebalance (used by OperatorPanel)
-
-*All endpoints return JSON. See `/backend/app.py` for server logic.*
+If `streamlit` isn’t found, install it first:
+```bash
+pip install streamlit
+```
 
 ---
 
-## ⚙️ Installation & Quickstart
+## .env configuration
+Create `submissions/OptiX/.env` (or export env vars in your shell):
 
-1. **Contracts:** Deploy OptimizerBoringVault. Export ABI as `src/abi/OptimizerBoringVault.json`.
-2. **Backend:**
-    ```bash
-    cd submissions/OptiX/backend
-    pip install -r requirements.txt
-    python app.py  # Flask runs on :5000
-    ```
-3. **Frontend:**
-    ```bash
-    cd submissions/OptiX/frontend
-    npm install
-    npm run dev  # or npm start
-    ```
-4. **Configure:** Add contract addresses and backend URL to `/src/lib/contractAddresses.js` and API client.
+```env
+# Required for GlueX APIs
+X_API_KEY=your_gluex_api_key
+uniquePID=your_unique_pid
+CHAIN_ID=hyperevm
+
+# Optional: only needed for on-chain demo buttons in the UI
+RPC_ENDPOINT=https://...
+VAULT_CONTRACT_ADDRESS=0x...
+PRIVATE_KEY=0x...   # demo only; do NOT use in production UIs
+```
 
 ---
 
-## ✨ Demo Flow
+## App structure
 
-- **User lands on dashboard:**
-    - See total assets, live APY, and all opportunities.
-    - Deposit/withdraw in 2 clicks—guided, gas estimates, auto-approval if needed.
-- **Operator login:**
-    - Access admin dashboard to whitelist vaults, see rebalance history, preview calldata, and trigger rebalances (powered by `/router-route`).
-- **Live updates:**
-    - All values reactively update on contract or backend changes. No manual refreshes.
-
----
-
-## 💡 What Sets OptiX Apart?
-- **Truly automated yield:** Users never need to move capital on their own, ever.
-- **Cost-aware logic:** Backend/APY engine ranks not just raw yield, but net returns after all costs.
-- **Admin-grade ops:** Protocol operators can manage strategy via a secure UI, end-to-end.
-- **Premium UX:** No DeFi clutter, premium look/feel, instant feedback, and world-class loading states.
-- **Open:** Code as modular as Yearn—but with GlueX superpowers.
+- `backend/streamlit_app.py` — Streamlit pages, forms, UI polish
+- `backend/interface.py` — `User` class (holdings, reallocation, commit_trade)
+- `backend/fetch.py` — GlueX yield + TVL API clients
+- `backend/apy.py` — Cost‑aware effective APY calculation
+- `backend/rank.py` — `choose_position` ranking policy
+- `backend/quote.py` — Router quote → calldata
+- `contracts/` — Optimizer vault contracts (reference)
+- `.streamlit/config.toml` — Dark theme
 
 ---
 
-## 🧠 Tech Stack
-- Solidity (BoringVault, ERC20)
-- Python (Flask backend, Vault+APY engine)
-- React + Ethers.js (frontend)
-- Foundry (contract testing)
-- Postgres/Redis for backend data (optional for production)
+## Features at a glance
+
+- Overview: portfolio hero (holdings, Net APY, 7d/30d projection)
+- Actions: side‑by‑side deposit and redeem
+- Reallocate: evaluate candidates with a progress bar and CSV‑like Top Options table
+- Quick Reallocate: evaluate + switch if better APY is found
+- Copy buttons on pool/token addresses
 
 ---
 
-## 🦾 Team & Credits
-- Backend/Contract: [authors...]
-- Frontend/UX: [authors...]
-- Special thanks: Hyperliquid, GlueX, Hackathon mentors, Morpho, and Aave for inspiration
+## Cost‑aware APY (intuition)
+
+We compare net benefit of switching (growth over a horizon minus costs) to your current APY. If the best candidate’s cost‑aware APY beats current, we allow reallocation and can generate GlueX Router calldata for execution.
 
 ---
 
-## 📸 UX Screenshots & Demo
+## Troubleshooting
 
-> **[Insert dashboard, modal, and operator-panel screenshots here! A picture is worth 10,000 APY.]
-
----
-
-## 📝 License
-
-MIT License — please see LICENSE in this folder.
+- “command not found: streamlit”: install with `pip install streamlit` and re‑run from `submissions/OptiX`.
+- API errors: ensure `X_API_KEY` and `uniquePID` are set and valid.
+- No options found: add/select vaults on the Wallet/Vaults page first.
 
 ---
 
-**OptiX: The effortless yield gateway for HyperEVM. Plug in. Earn More.**
+## License
+
+MIT
