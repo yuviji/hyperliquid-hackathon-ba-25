@@ -15,13 +15,15 @@
 ✅ **Operator & Approver UIs** – Dedicated dashboards for different roles  
 ✅ **Future-Proof Architecture** – Abstracted multisig layer for Safe/Den integration  
 
+VIDEO DEMO: https://youtu.be/h1wtZy3njvY
+
 TRANSACTION FROM VIDEO DEMO: 
 
 ### Deployed Contracts
 
 | Network | Contract | Address | Details |
 |---------|----------|---------|---------|
-| **HyperEVM** | LoopOpsMultisig | `0x608AE97215C659F9D28Eb6CaD709e832123A112b` | [View on Explorer](https://explorer.hyperliquid.xyz/address/0x608AE97215C659F9D28Eb6CaD709e832123A112b) |
+| **HyperEVM** | LoopOpsMultisig | `0x608AE97215C659F9D28Eb6CaD709e832123A112b` | View on Explorer |
 | **HyperEVM** | Test Token (LOOP) | `0x00fDBc53719604D924226215bc871D55e40a1009` | ERC20 for testing |
 
 **Multisig Configuration:**
