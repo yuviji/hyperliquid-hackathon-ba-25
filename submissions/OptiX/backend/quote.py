@@ -14,10 +14,13 @@ headers = {
 }
 
 def run_quote(payload):
-    result = requests.post(url, json=payload, headers=headers).json().get("result", {})
+    response_json = requests.post(url, json=payload, headers=headers).json()
+    result = response_json.get("result", {})
     effectiveOutputAmount = result.get("effectiveOutputAmount")
     calldata = result.get("calldata")
+    router = result.get("router") or response_json.get("router")  # try both levels
     return {
         "effectiveOutputAmount": effectiveOutputAmount,
-        "calldata": calldata
+        "calldata": calldata,
+        "router": router
     }
